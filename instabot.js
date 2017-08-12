@@ -1,21 +1,21 @@
-var Nightmare = require('nightmare');
-var nightmare = Nightmare({
+const Nightmare = require('nightmare');
+const nightmare = Nightmare({
     show: true,
     webPreferences: {
         partition: 'nopersist'
-    }
+    },
 });
 
-var username = req.body.username;
-var password = req.body.password;
-var search = req.body.search;
-var comment = req.body.comment;
-var posts = req.body.posts;
+const username = 'wisnugro';
+const password = '12345678';
+const search = '#jogja';
+const comment = 'keren';
+const posts = 10;
 
 nightmare
     .goto('http://instagram.com')
-    .wait('a[href="javascript:;"]')
-    .click('a[href="javascript:;"]') // log in option
+    .wait('._b93kq')
+    .click('._b93kq') // log in option
     .wait('input[name=username]')
     .insert('input[name=username]', username)
     .insert('input[name=password]', password)
@@ -24,13 +24,11 @@ nightmare
     .insert('input[placeholder=Search]', search)
     .wait('._gimca')
     .click('._gimca') // top suggest
-    .wait(5000)
-    .end()
     .wait('._mck9w')
     .click('._mck9w a') // click post
     .wait('._eszkz');
 
-for (var i = 0; i < posts; i++) {
+for (let i = 0; i < posts; i++) {
     nightmare.wait(1000)
         .click('._eszkz') // like
         .insert('._bilrf', comment) // comment
@@ -42,8 +40,8 @@ nightmare
     .wait(1000)
     .end()
     .then(function () {
-        res.json({ status: 'success' });
+        console.log('success');
     })
-    .catch(function (error) {
-        res.json({ status: 'success' });
+    .catch(function (err) {
+        console.log(err);
     });
