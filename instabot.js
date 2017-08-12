@@ -3,17 +3,17 @@ var path = require('path');
 var Nightmare = require('nightmare');
 var router = express.Router();
 var nightmare = Nightmare({
-    'show' : true,
+    show: true,
     webPreferences: {
         partition: 'nopersist'
-    }
+    },
 });
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname + '/../views/home.html'));
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
     var username = req.body.username;
     var password = req.body.password;
@@ -49,10 +49,10 @@ router.post('/', function(req, res, next) {
         .wait(1000)
         .end()
         .then(function () {
-            res.json({status:'success'});
+            res.json({ status: 'success' });
         })
         .catch(function (error) {
-            res.json({status:'success'});
+            res.json({ status: 'success' });
         });
 });
 
